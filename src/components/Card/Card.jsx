@@ -4,7 +4,6 @@ import s from './Card.module.css';
 
 const Card = () => {
   const location = useLocation();
-  // const from = location.state.from;
 
   return (
     <div className={s.card}>
