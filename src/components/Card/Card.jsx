@@ -1,23 +1,18 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import s from './Card.module.css';
 
-const Card = () => {
-  const location = useLocation();
+const Card = ({ info }) => {
+  const navigate = useNavigate();
+  const { id, name, image, species } = info;
 
   return (
-    <div className={s.card}>
-      <Link to={location.state?.from ?? '/character'}>
-        <img
-          className={s.image}
-          src={`${process.env.PUBLIC_URL}/rick.jpg`}
-          alt="Rick"
-        />
-        <div className={s.wrapper}>
-          <h2 className={s.title}>Rick Sanchez</h2>
-          <p className={s.text}>Human</p>
-        </div>
-      </Link>
+    <div className={s.card} onClick={() => navigate(`/character/${id}`)}>
+      <img className={s.image} src={image} alt={name} />
+      <div className={s.wrapper}>
+        <h2 className={s.title}>{name}</h2>
+        <p className={s.text}>{species}</p>
+      </div>
     </div>
   );
 };
