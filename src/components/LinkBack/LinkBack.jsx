@@ -7,7 +7,7 @@ const LinkBack = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={s.wrapper} onClick={() => navigate('/')}>
+    <div className={s.wrapper} onClick={() => navigate(-1)}>
       <BiLeftArrowAlt width="24" height="24" aria-label="back" color="black" />
       <span className={s.text}>Go back</span>
     </div>

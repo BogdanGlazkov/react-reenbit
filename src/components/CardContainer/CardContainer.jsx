@@ -6,39 +6,39 @@ import s from './CardContainer.module.css';
 
 const CardContainer = () => {
   const [characters, setCharacters] = useState([]);
-  const [query, setQuery] = useState('');
+  const [filteredCharacters, setFilteredCharacters] = useState([]);
+  const [query, setQuery] = useState(localStorage.getItem('query') || '');
   const [status, setStatus] = useState('idle');
 
   const onInputChange = e => {
     setQuery(e.target.value);
-    setCharacters(
-      characters.filter(el =>
-        el.name.toLowerCase().includes(query.toLowerCase())
-      )
-    );
-    console.log(query);
   };
 
   useEffect(() => {
     setStatus('pending');
     getCharacters()
-      .then(res => setCharacters(res))
+      .then(res => {
+        setCharacters(res);
+        setFilteredCharacters(res);
+      })
       .then(setStatus('resolved'))
       .catch(() => setStatus('rejected'));
-    // if (query) {
-    //   setStatus('pending');
-    // .then(res => {
-    //   if (!res.length) {
-    //     setStatus('idle');
-    //     setCharacters([]);
-    //     return;
-    //   }
-    //   setStatus('resolved');
-    //   setCharacters(() => res);
-    // })
-    // .catch(() => setStatus('rejected'));
-    // }
+
+    if (!localStorage.getItem('query')) {
+      localStorage.setItem('query', '');
+    }
   }, []);
+
+  useEffect(() => {
+    if (characters.length) {
+      const filtered = characters.filter(character =>
+        character.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredCharacters(filtered);
+      localStorage.setItem('query', query);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   return (
     <>
@@ -63,9 +63,9 @@ const CardContainer = () => {
       </form>
 
       <section className={s.container}>
-        {!characters.length
+        {!filteredCharacters.length
           ? null
-          : characters.map(el => <Card key={el.id} info={el} />)}
+          : filteredCharacters.map(el => <Card key={el.id} info={el} />)}
       </section>
     </>
   );

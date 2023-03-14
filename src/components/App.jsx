@@ -6,8 +6,8 @@ import Character from '../pages/Character/Character';
 const App = () => {
   return (
     <Routes>
-      <Route path={'/'} element={<Home />} />
-      <Route path={'/character/:id'} element={<Character />} />
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/character/:id" element={<Character />} />
     </Routes>
   );
 };
