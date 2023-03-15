@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-reenbit/static/css/main.18afa273.css",
+    "main.js": "/react-reenbit/static/js/main.6a0a42eb.js",
+    "index.html": "/react-reenbit/index.html",
+    "main.18afa273.css.map": "/react-reenbit/static/css/main.18afa273.css.map",
+    "main.6a0a42eb.js.map": "/react-reenbit/static/js/main.6a0a42eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.18afa273.css",
+    "static/js/main.6a0a42eb.js"
+  ]
+}
